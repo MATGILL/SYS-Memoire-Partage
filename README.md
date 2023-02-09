@@ -8,16 +8,17 @@ Compte-rendu
 
 #### Exécutez le programme plusieurs fois de suite. Que fait ce programme?
 
- Le programme créer un processus et affiche l'id de chacun des processus créé par se programme
+ Le programme créé un tableau contenant des indice de processus qui utilise le segment de mémoire. Tant qu'on a pas supprimer le segment de mémoire
+ le tableau gardera toujours les pid des processus précédent.
 
 #### ► Pourquoi n’utilise-t-il pas le paramètre IPC_PRIVATE comme premier paramètre de shmget()?
 
-Le paramètre IPC_PRIVATE sert a partagé le segment avec les processus enfant, ce n'est pas notre cas on préfère utiliser un point de rendez-vous.
+Le paramètre IPC_PRIVATE sert a partagé le segment avec les processus enfant, ce n'est pas notre cas on préfère utiliser un point de rendez-vous (key).
 
 #### ► Pourquoi le programme ne détruit-il pas le segment de mémoire partagée après avoir appellé shmdt()?
 
-La commande shmdt() sert a détacher un segment et ne va pas le supprimer, on pourrait plus tard s'y raccrocher.
-Il faut utiliser la commande : shmctl() avec le paramètre IPC_RMID
+La commande shmdt() sert a détacher un segment et ne va pas le supprimer, on pourrait toujours s'y accrocher plus tard.
+Il faut donc utiliser la commande : shmctl() avec le paramètre IPC_RMID
 
 #### ► Si vous appelez le programme plusieurs fois, combiende segments seront créés?
 
