@@ -8,21 +8,22 @@ Compte-rendu
 
 #### Exécutez le programme plusieurs fois de suite. Que fait ce programme?
 
- Le programme créé un tableau contenant des indice de processus qui utilise le segment de mémoire. Tant qu'on a pas supprimer le segment de mémoire
- le tableau gardera toujours les **pid** des processus précédent.
+ Le programme créé un tableau contenant des indices de processus qui utilisent le segment de mémoire. Tant qu'on a pas supprimé le segment de mémoire
+ le tableau gardera toujours les **pid** des processus précédents.
 
 #### ► Pourquoi n’utilise-t-il pas le paramètre IPC_PRIVATE comme premier paramètre de shmget()?
 
-Le paramètre **IPC_PRIVATE** sert a partagé le segment avec les processus enfant, ce n'est pas notre cas on préfère utiliser un point de rendez-vous (key).
+Le paramètre **IPC_PRIVATE** sert a partager le segment avec les processus enfants, ce n'est pas notre cas on préfère utiliser un point de rendez-vous (key).
 
 #### ► Pourquoi le programme ne détruit-il pas le segment de mémoire partagée après avoir appellé shmdt()?
 
-La commande **shmdt()** sert a détacher un segment et ne va pas le supprimer, on pourrait toujours s'y accrocher plus tard.
+La commande **shmdt()** sert à détacher un segment et ne va pas le supprimer, on pourrait toujours s'y accrocher plus tard.
 Il faut donc utiliser la commande : **shmctl()** avec le paramètre **IPC_RMID**.
 
 #### ► Si vous appelez le programme plusieurs fois, combiende segments seront créés?
 
-Si on l'appel n foix il va créé un seul segment, il sera le même pour tout les processus grace à la key (point de rendez-vous)
+Peut importe le nombre de fois que le programme sera appelé, il va créé un seul segment, il sera le même pour tout les processus grace 
+à la key (point de rendez-vous)
 
 ## Questions 1 :
 #### le programme nettoie.c qui détruit le segment de mémoire partagé créé par tp3.C
